@@ -17,10 +17,9 @@ namespace RestauranteService.Http
 
         public async Task EnviaRestauranteParaItem(RestauranteReadDto readDto)
         {
-            var httpContent = new StringContent(
-                   JsonSerializer.Serialize(readDto),
-                   Encoding.UTF8,
-                   "application/json");
+            var httpContent = new StringContent(JsonSerializer.Serialize(readDto),
+                                                Encoding.UTF8,
+                                                "application/json");
 
             var response = await _httpClient.PostAsync($"{_configuration["ItemService"]}", httpContent);
         }

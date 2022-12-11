@@ -18,18 +18,15 @@ public class RestauranteController : ControllerBase
     private readonly IRestauranteRepository _repository;
     private readonly IMapper _mapper;
     private readonly IItemHttpClient _itemHttpClient;
-    private readonly IMessageBusClient _messageBusClient;
 
     public RestauranteController(
         IRestauranteRepository repository,
         IMapper mapper,
-        IItemHttpClient itemClient,
-        IMessageBusClient messageBusClient)
+        IItemHttpClient itemClient)
     {
         _repository = repository;
         _mapper = mapper;
         _itemHttpClient = itemClient;
-        _messageBusClient = messageBusClient;
     }
 
     [HttpGet]
@@ -62,13 +59,7 @@ public class RestauranteController : ControllerBase
 
         var restauranteReadDto = _mapper.Map<RestauranteReadDto>(restaurante);
 
-
         await _itemHttpClient.EnviaRestauranteParaItem(restauranteReadDto);
-
-        var restaurantePublishedDto = _mapper.Map<RestaurantePublishedDto>(restauranteReadDto);
-        restaurantePublishedDto.Evento = "Restaurante_Published";
-        _messageBusClient.PublishRestaurante(restaurantePublishedDto);
-
 
         return CreatedAtRoute(nameof(GetRestauranteById), new { restauranteReadDto.Id }, restauranteReadDto);
     }

@@ -24,7 +24,7 @@ public class MessageBusSubscriber : BackgroundService
 
     private void IniciaRabbitMQ()
     {
-        _connection = new ConnectionFactory() { HostName = "localhost", Port = 8002 }.CreateConnection();
+        _connection = new ConnectionFactory() { HostName = "localhost", Port = 15672 }.CreateConnection();
         _channel = _connection.CreateModel();
         _channel.ExchangeDeclare(exchange: "trigger", type: ExchangeType.Fanout);
         _nomeDaFila = _channel.QueueDeclare().QueueName;
