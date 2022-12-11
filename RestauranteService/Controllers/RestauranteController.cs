@@ -24,11 +24,13 @@ public class RestauranteController : ControllerBase
     public RestauranteController(
         IRestauranteRepository repository,
         IMapper mapper,
-        IItemHttpClient itemClient)
+        IItemHttpClient itemClient,
+        IRabbitMqClient rabbitMqClient)
     {
         _repository = repository;
         _mapper = mapper;
         _itemHttpClient = itemClient;
+        _rabbitMqClient = rabbitMqClient;
     }
 
     [HttpGet]

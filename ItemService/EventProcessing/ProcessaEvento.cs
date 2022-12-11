@@ -17,14 +17,12 @@ namespace ItemService.EventProcessing
             _scopeFactory = scopeFactory;
         }
 
-        public void Processa(string mensagemParaConsumir)
+        public void Processa(string mensagem)
         {
             using var scope = _scopeFactory.CreateScope();
-
             var itemRepository = scope.ServiceProvider.GetRequiredService<IItemRepository>();
 
-            var restaurantePublishedDto = JsonSerializer.Deserialize<RestaurantePublishedDto>(mensagemParaConsumir);
-
+            var restaurantePublishedDto = JsonSerializer.Deserialize<RestaurantePublishedDto>(mensagem);
             var restaurante = _mapper.Map<Restaurante>(restaurantePublishedDto);
 
             if (!itemRepository.ExisteRestauranteExterno(restaurante.IdExterno))
