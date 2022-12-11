@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ItemService",
+    "\\ItemService\\AsyncDataServices"
   ],
-  "SelectedNode": "\\RestauranteService.sln",
+  "SelectedNode": "\\ItemService\\AsyncDataServices\\MessageBusSubscriber.cs",
   "PreviewInSolutionExplorer": false
 }
