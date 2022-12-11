@@ -1,4 +1,15 @@
-Create Dockers
+--Create Containers
 docker run --name item-service -d -p 8080:80 --network restaurante-bridge itemservice:1.1
 docker run --name restaurante-service -d -p 8081:80 --network restaurante-bridge restauranteservice:1.4
 docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -d --network restaurante-bridge mysql:8.0.31
+ 
+--Start Containers
+docker start mysql
+docker start item-service
+docker start restaurante-service
+ 
+--Stop Containers
+docker stop mysql
+docker stop item-service
+docker stop restaurante-service
+ 
